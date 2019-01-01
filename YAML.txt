@@ -1,0 +1,76 @@
+1) Mapping Example ::::::(Key-value pairs)
+
+Block style of YAML:::::::
+
+host: v-saijam
+datacenter: 
+  location: RR1
+  rackname: RR-N3-2-06
+  default: Dell
+  username: root
+  password: reddog
+
+
+Flow Style of YAML:::::
+
+host: v-saijam
+datacenter: { location: RR1 , rackname: RR1-N3-2-06 , default: Dell ,username: root , password: reddog }
+
+2)Sequences Example:::::::(Lists)
+
+example:::
+1)
+- web
+- db
+- dns
+
+2)
+host: v-saijam
+dc: 
+  location: RR1
+  rackname: rr1-N3-2-06
+roles:
+  - webserver
+  - wp_db
+contact:
+  - mobile: 9985385242
+  - land: 8328262268
+
+
+
+
+TAGS::::::
+1)Custom URI
+2)setting up local Tag
+3)setting up datatype
+
+eg:
+# This is example of Tags
+%TAG ! tag:hostdata:phl:
+---
+host: phl42
+datacenter:
+  location: !PHL RR1
+  rackname: dc.xml
+  cab: !!str 13
+  cab_unit: !!str 14
+
+Anchors::::::::(& is used to define anchor and * is used to refernce anchor)
+
+eg::
+---
+host: ravikrishna
+datacenter: 
+  dcname: &RR1 ravi
+  location: dc.xml
+roles:
+  &host
+  --webserver
+  --db
+---
+host: venkat
+datecenter:
+  dcname: *RR1
+  location: venu.xml
+roles: *host
+
